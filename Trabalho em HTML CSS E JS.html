@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabuada - Adição e Multiplicação</title>
+    <title>Tabuada - Multiplicação</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -61,52 +61,74 @@
 <body>
     <div class="container">
         <h1>TABUADA</h1>
-        <label for="numero">Número (0 a 20):</label><br>
-        <input type="number" id="numero" min="0" max="20" placeholder="Digite um número"><br>
+        <label for="numero">Número:</label><br>
+        <input type="number" id="numero" min="0"placeholder="Digite um número"><br>
 
         <label for="operacao">OPERAÇÃO:</label><br>
         <select id="operacao">
-            <option value="adicao">ADIÇÃO (+)</option>
             <option value="multiplicacao">MULTIPLICAÇÃO (×)</option>
         </select><br>
 
-        <button id="calcularBtn">CALCULAR</button>
-        <button id="limparBtn">LIMPAR</button>
+        <label for="sequencia">Quantidade de multiplicações:</label><br>
+        <input type="number" id="sequencia" min="1" placeholder="Digite a quantidade"><br>
+
+        <button onclick="gerarTabuada()">CALCULAR</button>
+        <button onclick="limpar()">LIMPAR</button>
 
         <div class="result" id="resultado"></div>
     </div>
 
-    <!-- JavaScript incluído no arquivo HTML -->
     <script>
-        document.getElementById("calcularBtn").addEventListener("click", gerarTabuada);
-        document.getElementById("limparBtn").addEventListener("click", limpar);
 
         function gerarTabuada() {
             let numero = Number(document.getElementById("numero").value);
             let operacao = document.getElementById("operacao").value;
+            let sequencia = Number(document.getElementById("sequencia").value);
             let resultado = document.getElementById("resultado");
 
-            resultado.innerHTML = "";
+            
 
-            if (isNaN(numero) || numero < 0 || numero > 20) {
-                resultado.innerHTML = "<p>Por favor, insira um número entre 0 e 20.</p>";
-                return;
+            if (isNaN(numero) || numero < 1 || isNaN(sequencia) || sequencia < 1) {
+                resultado.innerHTML = "<p>Por favor, insira um número valido.</p>";
             }
+            else if(sequencia==null){
+                sequencia=10;
 
-            let tabuadaHTML = `<h3>Tabuada do ${numero} (${getOperacaoTexto(operacao)}):</h3>`;
+                let tabuadaHTML = `<h3>Tabuada do ${numero} (${getOperacaoTexto(operacao)}):</h3>`;
 
-            for (let i = 0; i <= 20; i++) {
-                let resultadoOperacao;
-                if (operacao === "adicao") {
-                    resultadoOperacao = numero + i;
-                    tabuadaHTML += `<p>${numero} + ${i} = ${resultadoOperacao}</p>`;
-                } else if (operacao === "multiplicacao") {
-                    resultadoOperacao = numero * i;
-                    tabuadaHTML += `<p>${numero} x ${i} = ${resultadoOperacao}</p>`;
+                for (let i = 0; i <= sequencia; i++)
+                {
+                    let resultadoOperacao;
+                    if (operacao === "multiplicacao") 
+                    {
+                        resultadoOperacao = numero * i;
+                        tabuadaHTML += `<p>${numero} x ${i} = ${resultadoOperacao}</p>`;
+                    }
                 }
-            }
 
-            resultado.innerHTML = tabuadaHTML;
+                resultado.innerHTML = tabuadaHTML;
+            }
+            else{
+                let tabuadaHTML = `<h3>Tabuada do ${numero} (${getOperacaoTexto(operacao)}):</h3>`;
+
+                for (let i = 0; i <= sequencia; i++)
+                {
+                    let resultadoOperacao;
+                    if (operacao === "adicao") 
+                    {
+                        resultadoOperacao = numero + i;
+                        tabuadaHTML += `<p>${numero} + ${i} = ${resultadoOperacao}</p>`;
+                    } 
+                    else if (operacao === "multiplicacao") 
+                    {
+                        resultadoOperacao = numero * i;
+                        tabuadaHTML += `<p>${numero} x ${i} = ${resultadoOperacao}</p>`;
+                    }
+                }
+
+                resultado.innerHTML = tabuadaHTML;
+            }
+            
         }
 
         function getOperacaoTexto(operacao) {
