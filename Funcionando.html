@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabuada - Multiplicação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TABUADA</h1>
+        <label for="numero">Número:</label><br>
+        <input type="number" id="numero" min="0"placeholder="Digite um número"><br>
+
+        <label for="sequencia">Quantidade de multiplicações:</label><br>
+        <input type="number" id="sequencia" min="1" placeholder="Digite a quantidade"><br>
+
+        <button onclick="gerarTabuada()">CALCULAR</button>
+        <button onclick="limpar()">LIMPAR</button>
+
+        <div class="result" id="resultado"></div>
+    </div>
+
+    <script src="JavaScript.js"></script>
+</body>
+</html>
